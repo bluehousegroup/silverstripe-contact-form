@@ -2,18 +2,30 @@
 
 
 
-
+/**
+ * Decorates the page controller to provide a contact form handler on all pages
+ *
+ * @author Aaron Carlino <aaron@bluehousegroup.com>
+ * @package ContactForm
+ */
 class ContactFormControls extends DataExtension {
 	
+	
+	
+	/**
+	 * Handles the submission of the contact form. Checks spam and builds and sends the email
+	 *
+	 * @param array The form data
+	 * @param Form The Form object	
+	 */
 	public function doContactFormSubmit($data,$form) {
-
-
 		Session::set("FormData.{$form->FormName()}", $data);
 		$proxy = $form->proxy;
 
-		foreach($proxy->getSpamProtector()->getComponents() as $spam) {			
+		foreach($proxy->getSpamProtection() as $spam) {			
 			if($spam->isSpam($data, $form)) {				
 				$form->sessionMessage($spam->getMessage(),"bad");
+				$spam->logSpamAttempt($this->owner->request);
 				return $this->owner->redirectBack();
 			}	
 		}
@@ -48,6 +60,15 @@ class ContactFormControls extends DataExtension {
 
 	}
 	
+	
+	
+	
+	/**
+	 * Sends the email, either with the native {@link Email} class or with Postmark
+	 *
+	 * @param array The form data
+	 * @param Form The form object
+	 */
 	public function sendEmail($data,$form)  {
 		$proxy = $form->proxy;
 
