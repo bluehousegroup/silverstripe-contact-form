@@ -7,6 +7,7 @@ This module allows you to create a simple contact form to add to a page type. It
 * Integrates with the [Boostrap Forms module](http://www.github.com/unclecheese/silverstripe-bootstrap-forms)
 * Includes an API for automatic jQuery validation
 * A spam protection API that can be extended with your own spam protection plugins
+* Logs failed spam attempts to the database, and locks out repeat offending IPs
 
 
 ## The "Kitchen Sink" example
