@@ -33,6 +33,7 @@ class HoneyPotSpamProtector extends ContactFormSpamProtector {
 			#{$this->name} {position:absolute;left:-9999em;}
 		");
 		$proxy->addField(TextField::create($this->name, null));
+		$proxy->addOmittedField($this->name);
 		return $this;
 	}	
 
