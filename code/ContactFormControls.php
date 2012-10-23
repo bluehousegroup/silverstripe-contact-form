@@ -31,7 +31,7 @@ class ContactFormControls extends DataExtension {
 		}
 
 		if($func = $proxy->getOnBeforeSend()) {		   
-		     $result = $func($data,$form);
+		     $result = $func($data,$form,$proxy);
 		     if($result === false) {
 		     	return $this->owner->redirectBack();		   
 		     }
@@ -42,7 +42,7 @@ class ContactFormControls extends DataExtension {
 		
 		Session::clear("FormData.{$form->FormName()}");
 		if($func = $proxy->getOnAfterSend()) {
-		   $func($data, $form);
+		   $func($data, $form, $proxy);
 		}
 
 		if($proxy->getSuccessURL()) {
