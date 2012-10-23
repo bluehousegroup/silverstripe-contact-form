@@ -317,7 +317,7 @@ class ContactForm extends Object {
 	 * @param string The validation error message
 	 * @return ContactForm
 	 */
-	public function addRequiredField($field, $params = array(), $message = null) {
+	public function addRequiredField($field, $message = null, $params = array()) {
 		$params['required'] = true;
 		$this->addField($field);
 		$this->form->getValidator()->addRequiredField($field->getName());
