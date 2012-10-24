@@ -102,7 +102,7 @@ class SimpleQuestionSpamProtector extends ContactFormSpamProtector {
 			$rand = rand(0, sizeof($this->questions)-1);
 			$q = $this->questions[$rand];
 			$name = "SimpleQuestion_{$rand}";
-			$proxy->addField(HeaderField::create($this->heading))
+			$proxy->addField(LabelField::create("SimpleSpamQuestion_label_{$rand}",$this->heading))
 				  ->addField(TextField::create($name, $q['question']));		
 			$proxy->addOmittedField($name);
 		}
