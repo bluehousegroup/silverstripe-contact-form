@@ -793,6 +793,9 @@ class ContactForm extends Object {
 				},
 				messages: {";
 						foreach($this->validation as $name => $params) {
+							if(!isset($params['message'])) {
+								$params['message'] = sprintf(_t('ContactForm.FIELDISREQUIRED','"%s" is required'),$name);
+							}
 							$js .= "\n\t\t\t\t\t".$name.": \"" . addslashes($params['message'])."\",\n";				
 						}
 						$js .= "
