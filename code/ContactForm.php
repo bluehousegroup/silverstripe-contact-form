@@ -562,9 +562,11 @@ class ContactForm extends Object {
 	 * Sets the URL to redirect to after form is successfully submitted
 	 * 
 	 * @param string
+	 * @return ContactForm
 	 * */
 	public function setSuccessURL($url) {
 		$this->successURL = $url;
+		return $this;
 	}
 
 
