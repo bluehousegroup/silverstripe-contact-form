@@ -46,7 +46,7 @@ class ContactFormControls extends DataExtension {
 		}
 
 		if($proxy->getSuccessURL()) {
-			return $this->owner->redirect($form->getSuccessURL());
+			return $this->owner->redirect($proxy->getSuccessURL());
 		}
 		else {
 			if(Director::is_ajax()) {
