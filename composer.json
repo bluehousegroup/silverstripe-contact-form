@@ -1,5 +1,5 @@
 {
-    "name": "silverstripe/contact-form",
+    "name": "bluehousegroup/contact-form",
     "description": "Allows you to create a contact form in SilverStripe with optional Postmark integration. Works with Bootstrap Forms module.",
     "type": "silverstripe-module",
     "keywords": ["silverstripe", "forms", "form", "contact", "postmark", "email"],
