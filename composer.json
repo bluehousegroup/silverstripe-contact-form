@@ -10,6 +10,9 @@
         "email": "unclecheese@leftandmain.com"
     }
     ],
+    "extra": {
+	"installer-name": "contact_form"
+    },    
     "require":
     {
         "silverstripe/framework": "3.*",
