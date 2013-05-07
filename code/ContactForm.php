@@ -319,6 +319,7 @@ class ContactForm extends Object {
 	 */
 	public function addRequiredField($field, $message = null, $params = array()) {
 		$params['required'] = true;
+		$field->setTitle($field->Title() . " <span class=\"required\">*</span>");
 		$this->addField($field);
 		$this->form->getValidator()->addRequiredField($field->getName());
 		if(!$message) {
