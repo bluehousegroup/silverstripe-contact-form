@@ -11,7 +11,7 @@
 class ContactFormPage extends Page {
   
 
-	static $db = array (
+	private static $db = array (
 		'To' => 'Varchar(255)',
 		'Subject' => 'Varchar(255)',
 		'IntroText' => 'Text',    
@@ -19,7 +19,7 @@ class ContactFormPage extends Page {
 	);
 	
 	
-	static $defaults = array (
+	private static $defaults = array (
 		'To' => 'you@example.com',
 		'Subject' => 'New contact form',
 		'IntroText' => 'A user has submitted a new contact form from your website. His/her information appears below.',
@@ -49,7 +49,7 @@ class ContactFormPage extends Page {
 class ContactFormPage_Controller extends Page_Controller {
   
 
-	static $allowed_actions = array (
+	private static $allowed_actions = array (
 		'Form'
 	);
 	

@@ -16,7 +16,7 @@ class SimpleQuestionSpamProtector extends ContactFormSpamProtector {
 	/**
 	 * @var boolean If true, allow differences in case and spacing when evaluating the answer
 	 */
-	public static $forgiving = true;
+	private static $forgiving = true;
 
 
 
