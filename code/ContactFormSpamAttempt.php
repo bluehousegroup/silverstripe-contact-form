@@ -10,7 +10,7 @@
 class ContactFormSpamAttempt extends DataObject {
 	
 
-	static $db = array (
+	private static $db = array (
 		'IPAddress' => 'Varchar',
 		'URL' => 'Text',
 		'Notes' => 'Text'
