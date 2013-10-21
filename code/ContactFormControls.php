@@ -85,7 +85,10 @@ class ContactFormControls extends DataExtension {
 					$value = $field->value ? _t('ContactForm.YES','Yes') : _t('ContactForm.NO','No');
 				}
 				else if(class_exists("UploadifyField") && $field instanceof UploadifyField) {
-				    $uploadedFiles[] = $field->Value();
+					$uploadedFiles[] = $field->Value();
+				}
+				else if(is_array($field->Value())){
+					$value = $field->Value();
 				}
 				else {
 					$value = nl2br($field->Value());
