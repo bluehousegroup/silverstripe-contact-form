@@ -13,9 +13,9 @@ $IntroText
 	<% if Values %>
 		<strong>$Label</strong>:<br />
 		<ul>
-			<% control Values %>
+			<% loop Values %>
 				<li>$Value</li>
-			<% end_control %>
+			<% end_loop %>
 		</ul>
 	<% else %>
 		<strong>$Label</strong>: $Value <br />
