@@ -330,7 +330,38 @@ class ContactForm extends Object {
 		return $this;
 	}
 
+	
+	public function setRequiredFields($fieldArray){
+		if(is_array($fieldArray)){
+			foreach($fieldArray as $fieldName => $validationMessage){
+				$field = $this->form->Fields()->dataFieldByName($fieldName);
+				$this->form->getValidator()->addRequiredField($field->getName());
+				$params['required'] = true;
+				if(!$validationMessage){
+					$params['message'] = sprintf(_t('ContactForm.FIELDISREQUIRED','"%s" is required'),$field->Title());
+				}else{
+					$params['message'] = $validationMessage;
+				}
+				$this->updateValidation($field->getName(), $params);
+			}
+		}else{
+			throw new Exception('setRequiredFields is expecting an array.  Use setRequredField if you modifing a single field.');
+		}
+		return $this;
+	}
 
+	public function setRequiredField($fieldName, $message = null){
+		$field = $this->form->Fields()->datafieldByName($fieldName);
+		$this->form->getValidator()->addRequiredField($field->getName());
+		$params['required'] = true;
+		if($message){
+			$params['message'] = $message;
+		}else{
+			$params['message'] = sprintf(_t('ContactForm.FIELDISREQUIRED','"%s" is required'),$field->Title());
+		}
+		$this->updateValidation($field->getName(), $params);
+		return $this;
+	}
 
 
 	/**
