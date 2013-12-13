@@ -123,7 +123,10 @@ class ContactFormControls extends DataExtension {
 				->subject($emailSubject)
 				->messageHtml("$html");
 			try {
-				$email->addTo($emailTo);
+				$emailArray = array_map('trim', explode(',',$emailTo));
+				foreach($emailArray as $emailDestination){
+					$email->addTo($emailDestination);
+				}
 			}
 			catch(Exception $e) {
 				$form->sessionMessage(_t('ContactForm.BADTOADDRESS','It appears there is no receipient for this form. Please contact an administrator.'),'bad');
