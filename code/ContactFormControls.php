@@ -121,7 +121,7 @@ class ContactFormControls extends DataExtension {
 			require_once(Director::baseFolder()."/contact_form/code/thirdparty/postmark/Postmark.php");
 			$email = Mail_Postmark::compose()
 				->subject($emailSubject)
-				->messageHtml($html);
+				->messageHtml("$html");
 			try {
 				$email->addTo($emailTo);
 			}
