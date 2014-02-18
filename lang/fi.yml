@@ -1,0 +1,11 @@
+fi:
+  ContactForm:
+    DESCRIPTION: 'Sivupohja yhteydenottolomakeella'
+    PLULARNAME: 'Yhteydenottolomakeet'
+    SINGULARNAME: 'Yhteydenottolomake'
+    FIELDISREQUIRED: 'Kenttä on pakollinen'
+    TO: 'Vastaanottaja'
+    SUBJECT: 'Viestin otsikko'
+    INTROTEXT: 'Sähköpostin kuvausteksti'
+    SUCCESSMESSAGE: 'Kuittaus onnistuneesta lähetyksestä'
+    TABCONTACTFORM: 'Lomake'
