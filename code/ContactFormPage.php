@@ -9,6 +9,11 @@
  * @package ContactForm
  */
 class ContactFormPage extends Page {
+
+	static $singular_name = 'ContactForm Page';
+	static $plural_name = 'ContactForm Pages';
+	static $description = 'ContactForm Page is a simple contact page extension with form.';
+	static $icon = '';
   
 
 	private static $db = array (
@@ -30,11 +35,12 @@ class ContactFormPage extends Page {
 	
 	public function getCMSFields() {
 		$f = parent::getCMSFields();
+		$f->findOrMakeTab('Root.ContactForm', _t('ContactForm.TABCONTACTFORM','ContactForm'));
 		$f->addFieldsToTab("Root.ContactForm", array(
-		new TextField('To','Send form to (comma separated email addresses)'),
-		new TextField('Subject','Subject of email'),
-		new TextareaField('IntroText','Email intro text'),
-		new HtmlEditorField('SuccessMessage','Success message')
+		new TextField('To', _t('ContactForm.TO','Send form to (comma separated email addresses)')),
+		new TextField('Subject', _t('ContactForm.SUBJECT', 'Subject of email')),
+		new TextareaField('IntroText', _t('ContactForm.INTROTEXT','Email intro text')),
+		new HtmlEditorField('SuccessMessage', _t('ContactForm.SUCCESSMESSAGE','Success message'))
 		));
 		
 		return $f;

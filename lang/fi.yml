@@ -1,0 +1,17 @@
+fi:
+  ContactForm:
+    DESCRIPTION: 'Sivupohja yhteydenottolomakeella'
+    PLULARNAME: 'Yhteydenottolomakeet'
+    SINGULARNAME: 'Yhteydenottolomake'
+    BADTOADDRESS: 'Lomakkeella ei ole vastaanottajaa'
+    FORMNAMEERROR: 'Ole hyvä ja kirjoita nimesi'
+    FORMMESSAGEERROR: 'Unohditko kirjoittaa viestin?'
+    FIELDISREQUIRED: 'Pakollinen kenttä'
+    INTROTEXT: 'Sähköpostin kuvausteksti'
+    NO: 'Ei'
+    SEND: 'Lähetä'
+    SUBJECT: 'Viestin otsikko'
+    SUCCESSMESSAGE: 'Kuittaus onnistuneesta lähetyksestä'
+    TABCONTACTFORM: 'Lomake'
+    TO: 'Vastaanottaja'
+    YES: 'Kyllä'
