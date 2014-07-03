@@ -147,7 +147,10 @@ class ContactFormControls extends DataExtension {
 
 		}
 		else {
-			$email = Email::create(null, $emailTo, $emailSubject, $html);	
+			//You can define MAIL_FROM_ADDRESS in mysite/_config.php
+			$sender = null;
+			if(defined('MAIL_FROM_ADDRESS')) $sender = MAIL_FROM_ADDRESS;
+			$email = Email::create($sender, $emailTo, $emailSubject, $html);
 			if($replyTo) {
 				$email->replyTo($replyTo);
 			}
