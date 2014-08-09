@@ -259,6 +259,7 @@ class ContactForm extends Object {
 			FieldList::create(),
 			FieldList::create(
 				FormAction::create("doContactFormSubmit", _t('ContactForm.SEND','Send'))
+				->setStyle('default')
 			),
 			RequiredFields::create()
 		);
