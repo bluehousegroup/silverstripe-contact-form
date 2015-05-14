@@ -49,6 +49,13 @@ class ContactForm extends Object {
 
 
 	/**
+	 * @var boolean If false, do not include jQuery validation
+	 */
+	protected static $jquery_validation = true;
+
+
+
+	/**
 	 * @var array The default array of {@link ContactFormSpamProtector} objects
 	 */
 	protected static $default_spam_protection;
@@ -197,8 +204,19 @@ class ContactForm extends Object {
 	}
 
 
-	
-	
+
+	/**
+	 * Sets the global setting that jQuery validation is included
+	 *
+	 * @param boolean
+	 */
+	public static function set_jquery_validation($bool = true) {
+		self::$jquery_validation = $bool;
+	}
+
+
+
+
 	/**
 	 * Sets the default spam protection
 	 *
@@ -283,7 +301,7 @@ class ContactForm extends Object {
 		}
 		else if($field instanceof EmailField) {
 			$this->updateValidation($field->getName(), array ('email' => true));
-		}		
+		}
 		$this->form->Fields()->push($field);
 		return $this;
 	}
@@ -837,7 +855,7 @@ class ContactForm extends Object {
 									$key = $key ? "true" : "false";
 								}
 								elseif(is_string($key)) {
-									$key = "\"{$key}\"";
+									$key = "{$key}";
 								}
 								$js .= "\t\t\t\t\t\t{$index}: {$key},\n";
 							}
@@ -877,14 +895,16 @@ class ContactForm extends Object {
 		}
 		foreach($this->spamProtection as $spam) {
 			$spam->initialize($this);
-		}	
-		if(!empty($this->validation)) {
-			if(!self::$jquery_included) {
-				Requirements::javascript(THIRDPARTY_DIR."/jquery/jquery.js");
-			}
-			Requirements::javascript("contact_form/javascript/validation.js");			
-			Requirements::customScript($this->getValidationJS());
+		}
+		if (self::$jquery_validation) {
+			if(!empty($this->validation)) {
+				if(!self::$jquery_included) {
+					Requirements::javascript(THIRDPARTY_DIR."/jquery/jquery.js");
+				}
+				Requirements::javascript("contact_form/javascript/validation.js");			
+				Requirements::customScript($this->getValidationJS());
 
+			}
 		}
 		if($data = Session::get("FormData.{$this->form->FormName()}")) {
 			$this->form->loadDataFrom($data);
