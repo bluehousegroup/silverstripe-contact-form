@@ -212,6 +212,18 @@ class ContactForm extends Object {
 
 
 
+
+	/**
+	 * Sets the global setting that jQuery validation is included
+	 *
+	 * @param boolean
+	 */
+	public static function set_jquery_validation_included($bool = true) {
+		self::$jquery_validation_included = $bool;
+	}
+
+
+
 	/**
 	 * Sets the global setting that jQuery validation is included
 	 *
