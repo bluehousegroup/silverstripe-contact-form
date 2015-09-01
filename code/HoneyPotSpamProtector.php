@@ -32,7 +32,7 @@ class HoneyPotSpamProtector extends ContactFormSpamProtector {
 		Requirements::customCSS("
 			#{$this->name} {position:absolute;left:-9999em;}
 		");
-		$proxy->addField(TextField::create($this->name, null));
+		$proxy->addField(TextField::create($this->name, null)->setAttribute('tabindex','-1'));
 		$proxy->addOmittedField($this->name);
 		return $this;
 	}	
