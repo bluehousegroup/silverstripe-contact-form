@@ -7,15 +7,13 @@
  * @author Aaron Carlino <aaron@bluehousegroup.com>
  * @package ContactForm
  */
-class ContactFormSpamAttempt extends DataObject {
-	
+class ContactFormSpamAttempt extends DataObject
+{
+    
 
-	private static $db = array (
-		'IPAddress' => 'Varchar',
-		'URL' => 'Text',
-		'Notes' => 'Text'
-	);
-
-
-	
+    private static $db = array(
+        'IPAddress' => 'Varchar',
+        'URL' => 'Text',
+        'Notes' => 'Text'
+    );
 }
