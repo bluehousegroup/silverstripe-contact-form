@@ -9,7 +9,6 @@
  * @package ContactForm
  */
 class ContactFormPage extends Page {
-  
 
 	private static $db = array (
 		'To' => 'Varchar(255)',
@@ -40,14 +39,12 @@ class ContactFormPage extends Page {
 		return $f;
 	}
 
-  
 }
 
 
 
 
 class ContactFormPage_Controller extends Page_Controller {
-  
 
 	private static $allowed_actions = array (
 		'Form'
