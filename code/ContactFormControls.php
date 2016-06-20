@@ -1,7 +1,5 @@
 <?php
 
-
-
 /**
  * Decorates the page controller to provide a contact form handler on all pages
  *
@@ -31,10 +29,10 @@ class ContactFormControls extends DataExtension {
 		}
 
 		if($func = $proxy->getOnBeforeSend()) {		   
-		     $result = $func($data,$form,$proxy);
-		     if($result === false) {
-		     	return $this->owner->redirectBack();		   
-		     }
+			$result = $func($data,$form,$proxy);
+			if($result === false) {
+				return $this->owner->redirectBack();		   
+			}
 		}
 	
 			
@@ -42,7 +40,7 @@ class ContactFormControls extends DataExtension {
 		
 		Session::clear("FormData.{$form->FormName()}");
 		if($func = $proxy->getOnAfterSend()) {
-		   $func($data, $form, $proxy);
+			$func($data, $form, $proxy);
 		}
 
 		if($proxy->getSuccessURL()) {
@@ -56,13 +54,10 @@ class ContactFormControls extends DataExtension {
 			return $this->owner->redirectBack();
 		}
 
-	
 
 	}
 	
-	
-	
-	
+
 	/**
 	 * Sends the email, either with the native {@link Email} class or with Postmark
 	 *
@@ -138,10 +133,10 @@ class ContactFormControls extends DataExtension {
 				}
 				catch(Exception $e) {}
 			}
-    			
+				
 			foreach($uploadedFiles as $file_id) {
-			    if($file = File::get()->byID($file_id)) {
-			    	$email->addAttachment($file->getFullPath());
+				if($file = File::get()->byID($file_id)) {
+					$email->addAttachment($file->getFullPath());
 				}
 			}		
 
@@ -155,18 +150,18 @@ class ContactFormControls extends DataExtension {
 				$email->replyTo($replyTo);
 			}
 			foreach($uploadedFiles as $file_id) {
-			    if($file = File::get()->byID($file_id)) {
-			    	$email->attachFile($file->getFullPath(), basename($file->Filename));
-			    }
+				if($file = File::get()->byID($file_id)) {
+					$email->attachFile($file->getFullPath(), basename($file->Filename));
+				}
 			}
 		}
 			
 		$email->send();	
 
-        foreach($uploadedFiles as $file_id) {
-	        if($file = File::get()->byID($file_id)->first())
-            $file->delete();
-        }			
+		foreach($uploadedFiles as $file_id) {
+			if($file = File::get()->byID($file_id)->first())
+			$file->delete();
+		}			
 	}
 	
 }
