@@ -2,7 +2,7 @@
 
 
 /**
- * Builds a simple contact form with spam protection. 
+ * Builds a simple contact form with spam protection.
  * Integrates with Postmark <http://www.postmarkapp.com>
  * to send emails externally.
  *
@@ -22,7 +22,7 @@
  *
  * @author Aaron Carlino <aaron@bluehousegroup.com>
  * @package ContactForm
- */			
+ */
 class ContactForm extends Object {
 
 
@@ -45,6 +45,13 @@ class ContactForm extends Object {
 	 * @var boolean If true, do not include the SilverStripe jQuery file
 	 */
 	protected static $jquery_included = false;
+
+
+
+	/**
+	 * @var boolean If true, do not include the jQuery validation file
+	 */
+	protected static $jquery_validation_included = false;
 
 
 
@@ -110,7 +117,7 @@ class ContactForm extends Object {
 	protected $validation = array ();
 
 
-	
+
 	/**
 	 * @var string The name of the controller function that creates this form
 	 */
@@ -155,18 +162,18 @@ class ContactForm extends Object {
 
 	/**
 	 * @var string A success message to display after the form has been submitted
-	 */	
+	 */
 	protected $successMessage = null;
 
 
-	
+
 	/**
 	 * @var string The template to use for the email
-	 */	
+	 */
 	protected $emailTemplate = "ContactPageEmail";
 
-	
-	
+
+
 	/**
 	 * @var array A list of field names to omit from the email
 	 */
@@ -185,7 +192,7 @@ class ContactForm extends Object {
 	/**
 	 * Sets the global setting to use or not use BootstrapForm when available
 	 *
-	 * @param boolean 
+	 * @param boolean
 	 */
 	public static function set_use_bootstrap($bool) {
 		self::$use_bootstrap = $bool;
@@ -201,6 +208,18 @@ class ContactForm extends Object {
 	 */
 	public static function set_jquery_included($bool = true) {
 		self::$jquery_included = $bool;
+	}
+
+
+
+
+	/**
+	 * Sets the global setting that jQuery validation is included
+	 *
+	 * @param boolean
+	 */
+	public static function set_jquery_validation_included($bool = true) {
+		self::$jquery_validation_included = $bool;
 	}
 
 
@@ -227,8 +246,8 @@ class ContactForm extends Object {
 	}
 
 
-	
-	
+
+
 	/**
 	 * A utility method that creates a label from a form field name
 	 *
@@ -251,7 +270,7 @@ class ContactForm extends Object {
 		// Limit field names to 64 characters, for databases
 		$name = substr($name, 0, 64);
 
-		return $name;		
+		return $name;
 	}
 
 
@@ -264,10 +283,10 @@ class ContactForm extends Object {
 	 * @param string The email address to which the form will send the email
 	 * @param string The subject of the email
 	 */
-	public function __construct($name, $to, $subject) {		
+	public function __construct($name, $to, $subject) {
 		$this->toAddress = $to;
-		$this->messageSubject = $subject;	
-		$formClass = $this->isBootstrap() ? "BootstrapForm" : "Form";		
+		$this->messageSubject = $subject;
+		$formClass = $this->isBootstrap() ? "BootstrapForm" : "Form";
 		$spam = self::$default_spam_protection ? self::$default_spam_protection : array();
 		$this->setSpamProtection($spam);
 
@@ -288,7 +307,7 @@ class ContactForm extends Object {
 
 
 
-	
+
 	/**
 	 * Adds a field to the contact form
 	 *
@@ -296,7 +315,7 @@ class ContactForm extends Object {
 	 * @return ContactForm
 	 */
 	public function addField($field) {
-		if(!$field instanceof FormField) {			
+		if(!$field instanceof FormField) {
 			return $this->addFromString((string) $field);
 		}
 		else if($field instanceof EmailField) {
@@ -348,7 +367,7 @@ class ContactForm extends Object {
 		return $this;
 	}
 
-	
+
 	public function setRequiredFields($fieldArray){
 		if(is_array($fieldArray)){
 			foreach($fieldArray as $fieldName => $validationMessage){
@@ -361,7 +380,7 @@ class ContactForm extends Object {
 					}else{
 						$params['message'] = $validationMessage;
 					}
-					$this->updateValidation($field->getName(), $params);	
+					$this->updateValidation($field->getName(), $params);
 				}else{
 					throw new Exception('No field found for "'.$fieldName.'"');
 				}
@@ -387,7 +406,7 @@ class ContactForm extends Object {
 		}else{
 			throw new Exception('No field found for "'.$fieldName.'"');
 		}
-		
+
 	}
 
 
@@ -421,9 +440,9 @@ class ContactForm extends Object {
 		}
 		return self::$use_bootstrap;
 	}
-	
 
-	
+
+
 
 	/**
 	 * Given the global and instance-level settings, determine if this form will use Postmark
@@ -441,7 +460,7 @@ class ContactForm extends Object {
 
 
 
-	
+
 
 	/**
 	 * Adds a form field given a string, e.g. "What is your name?//Text"
@@ -449,7 +468,7 @@ class ContactForm extends Object {
 	 * @param string The text description of the field to add
 	 * @return ContactForm
 	 */
-	public function addFromString($str) {	
+	public function addFromString($str) {
 		$parts = explode("//", $str);
 		if(sizeof($parts) != 2) continue;
 		list($label, $type) = $parts;
@@ -463,7 +482,7 @@ class ContactForm extends Object {
 				$this->addRequiredField(Object::create($type, $name, substr_replace($label ,"",-1)));
 			}
 			else {
-				$this->addField(Object::create($type, $name, $label));	
+				$this->addField(Object::create($type, $name, $label));
 			}
 		}
 
@@ -474,7 +493,7 @@ class ContactForm extends Object {
 
 
 	/**
-	 * Sets the form to use or not use Boostrap. If the form is already created, make sure to 
+	 * Sets the form to use or not use Boostrap. If the form is already created, make sure to
 	 * create a new one if the class is different
 	 *
 	 * @param boolean
@@ -497,7 +516,7 @@ class ContactForm extends Object {
 
 
 
-	
+
 	/**
 	 * Gets the {@link Form} object that this object is managing
 	 *
@@ -517,7 +536,7 @@ class ContactForm extends Object {
 	 * @return ContactForm
 	 */
 	public function setSpamProtection($s) {
-		$this->spamProtection = $s;		
+		$this->spamProtection = $s;
 		return $this;
 	}
 
@@ -566,7 +585,7 @@ class ContactForm extends Object {
 
 
 
-	
+
 	/**
 	 * Gets the function to call before sending the form
 	 *
@@ -578,7 +597,7 @@ class ContactForm extends Object {
 
 
 
-	
+
 	/**
 	 * Sets an anonymous function to call after the form sends
 	 *
@@ -613,13 +632,13 @@ class ContactForm extends Object {
 	public function getSuccessURL() {
 		return $this->successURL;
 	}
-	
-	
-	
-	
+
+
+
+
 	/**
 	 * Sets the URL to redirect to after form is successfully submitted
-	 * 
+	 *
 	 * @param string
 	 * @return ContactForm
 	 * */
@@ -705,7 +724,7 @@ class ContactForm extends Object {
 
 
 
-	
+
 	/**
 	 * Sets the template to use for the email
 	 *
@@ -786,7 +805,7 @@ class ContactForm extends Object {
 
 
 
-	
+
 	/**
 	 * Sets the text to display in the email before all the form data
 	 *
@@ -869,7 +888,7 @@ class ContactForm extends Object {
 							if(!isset($params['message'])) {
 								$params['message'] = sprintf(_t('ContactForm.FIELDISREQUIRED','"%s" is required'),$name);
 							}
-							$js .= "\n\t\t\t\t\t".$name.": \"" . addslashes($params['message'])."\",\n";				
+							$js .= "\n\t\t\t\t\t".$name.": \"" . addslashes($params['message'])."\",\n";
 						}
 						$js .= "
 				}
@@ -877,7 +896,7 @@ class ContactForm extends Object {
 		})
 		})(jQuery);";
 
-		return $js;		
+		return $js;
 	}
 
 
@@ -901,14 +920,16 @@ class ContactForm extends Object {
 				if(!self::$jquery_included) {
 					Requirements::javascript(THIRDPARTY_DIR."/jquery/jquery.js");
 				}
-				Requirements::javascript("contact_form/javascript/validation.js");			
+				if(!self::$jquery_validation_included) {
+					Requirements::javascript("contact_form/javascript/validation.js");
+				}
 				Requirements::customScript($this->getValidationJS());
 
 			}
 		}
 		if($data = Session::get("FormData.{$this->form->FormName()}")) {
 			$this->form->loadDataFrom($data);
-		}				
+		}
 		return $this->form;
 	}
 }
