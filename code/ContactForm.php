@@ -264,7 +264,7 @@ class ContactForm extends Object {
 	 * @param string The email address to which the form will send the email
 	 * @param string The subject of the email
 	 */
-	public function __construct($name, $to, $subject) {		
+	public function __construct($controller, $name, $to, $subject) {		
 		$this->toAddress = $to;
 		$this->messageSubject = $subject;	
 		$formClass = $this->isBootstrap() ? "BootstrapForm" : "Form";		
@@ -272,7 +272,7 @@ class ContactForm extends Object {
 		$this->setSpamProtection($spam);
 
 		$this->form = Object::create($formClass,
-			Controller::curr(),
+			$controller,
 			$name,
 			FieldList::create(),
 			FieldList::create(

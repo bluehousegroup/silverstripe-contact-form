@@ -59,7 +59,7 @@ class ContactFormPage_Controller extends Page_Controller {
 	 * @return ContactForm
 	 */
 	public function Form() {
-		return ContactForm::create("Form", $this->To, $this->Subject)
+		return ContactForm::create($this, "Form", $this->To, $this->Subject)
 			->setSuccessMessage($this->SuccessMessage)
 			->setIntroText($this->IntroText);
 	}
